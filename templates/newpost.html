@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-Newpost
+<link rel="stylesheet" type="text/css" href="style.css">
+    <h1>Submit a new Blog Post</h1>
+    <form action = '/' method='post'>
+        <label>
+            Title:
+            <input type="text" name='title' />
+        </label><br>
+        <textarea rows= "8" columns = "300" class = 'blogbox' name='body'>
+        
+        </textarea><br>
+
+        <input type="submit" value='Submit' />
+    </form>
+
+    <hr />
    
 {% endblock %}

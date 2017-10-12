@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-Blog
+
+{%for blogpost in entries%}
+    <h2><a href = "submit?id={{blogpost.id}}">{{blogpost.id}} | {{blogpost.name}}</a></h2><br>
+    <p>{{blogpost.body}}</p>
+{%endfor%}
 
    
 {% endblock %}

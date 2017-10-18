@@ -4,21 +4,35 @@ import cgi
 
 app = Flask(__name__)
 app.config['DEBUG'] = True      # displays runtime errors in the browser, too
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:Minn#2020@localhost:3306/build-a-blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:password@localhost:3306/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
 
+#creating some classes...classes are good to go
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
     body = db.Column(db.String(500))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, name, body):
         self.name = name
         self.body = body
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(120))
+    password = db.Column(db.String(120))
+    blogs = db.relationship('Blog', backref = 'owner')
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
     
 
+#We can handle that...
 @app.route('/')
 def index():
 
@@ -59,6 +73,26 @@ def submit():
     id = request.args.get("id")
     blog_submit = Blog.query.filter_by(id = id).first()
     return render_template("submit.html", blog_submit = blog_submit) 
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        
+        if user and user.password == password:
+            session['username'] = username
+            return redirect('/newpost')
+        if not user:
+            flash('User name does not exist. Create account.')
+            return render_template('login.html')
+        else: 
+            flash('Password incorrect')
+            return render_template('login.html')
+    return render_template('/login.html')
 
 if __name__ == "__main__":
     app.run()

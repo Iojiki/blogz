@@ -7,7 +7,14 @@
 <nav>
     <a href="/">Home</a> |
     <a href="/blog">Main Blog</a> |
-    <a href="/newpost">Add New Blog</a> 
+    <a href="/newpost">Add New Blog</a> |
+    <a href="/signup">Register</a> |
+    <a href="/login">Login</a> | 
+    <a href="/logout">Logout</a>
+    <br>
+    {% if session['username'] %}
+    Logged in as User: <b><em>{{session['username']}}</em></b>
+    {% endif %}
 </nav>
 
     {% block content %}

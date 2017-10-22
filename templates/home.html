@@ -5,9 +5,33 @@
 
 <form action = '/blog' method='get'>
     <input type="submit" value='Main Blog' />
-</form><form action = '/newpost' method='get'>
+</form><br>
+<form action = '/newpost' method='get'>
     <input type="submit" value='New Post' />
-</form>
+</form><br>
+<form action = '/login' method='get'>
+    <input type="submit" value='Login' />
+</form><br>
+<form action = '/signup' method='get'>
+    <input type="submit" value='Register' />
+</form><br>
+
+<h2> Current Registered Bloggers </h2>
+
+{% for user in users %}
+            <ul>
+        <li>
+            <i><a href="/blog?user={{user.id}}">{{ user.username }}</a></i>
+
+            <input type="hidden" name="user" value="{{user.id}}"/> 
+
+        </li>
+
+            </ul>
+
+        {% endfor %}
+    
+
 
    
 {% endblock %}

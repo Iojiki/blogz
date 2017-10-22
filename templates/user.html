@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for blog in blogs %}
+   
+    
+    <h2><a href='/blog?id={{blog.id}}' name="blog_title" value="{{blog_title}}">{{ blog.title }}</a></h2>
+    <h4 name="blog_body" value="blog_body}}">{{blog.body}}</h4>
+
+    <p><i>Posted by: <a href="/blog?user={{blog.owner.id}}">{{ blog.owner.username }}</a></i></p>
+
+    <input type="hidden" name="id" value="{{blog.id}}"/>
+    <hr />
+    
+      
+{% endfor %}
+   
+{% endblock %}

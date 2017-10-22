@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+ <h1>Register</h1>
  <form action = '/signup' method='POST'>
         <label>
-            Title:
-            <input type="text" name='name' />
-        </label>{{error_title}}<br>
-        <textarea rows= "8" columns = "300" class = 'blogbox' name='body'></textarea>{{error_body}}<br>
+            Username
+            <input type="text" name='username' />
+        </label>{{error_username}}<br>
+        <label>
+            Password
+        <input type="password" name='password' />
+        </label>{{error_password}}<br>
+        <label>
+            Retype Password
+        <input type="password" name='verify_password' />
+        </label>{{error_verify_password}}<br>
 
-        <input type="submit" value='Submit' />
+        <input type="submit" value='Register' />
     </form>
    
 {% endblock %}

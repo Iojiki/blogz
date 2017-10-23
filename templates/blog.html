@@ -8,13 +8,13 @@
         {% for blog in blogs %}
             {% if user.id == blog.owner_id %}
     
-    <h3><a href="/blog?id={{blog.id}}" value="{{blog.name}}">{{blog.name}}</a></h3>
+    <h2><a href="/blog?id={{blog.id}}" value="{{blog.name}}">{{blog.name}}</a></h2>
     
     <h4 value="{{blog.body}}">{{blog.body}}</h4>
 
     <h5><i>Posted by:<a href="/blog?user={{user.id}}">{{ user.username }}</a></i></h5>
     
-    <input type="hidden" name="id" value="{{blog.id}}"/>
+     <input type="hidden" name="id" value="{{blog.id}}"/> 
 
     <hr />
              {% endif %}
